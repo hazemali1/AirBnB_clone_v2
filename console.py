@@ -113,8 +113,7 @@ class HBNBCommand(cmd.Cmd):
                         for i in range(1, (len(param[1]) - 1)):
                             if param[1][i] == '"':
                                 if param[1][i - 1] == "\\":
-                                    param[1] = param[1].replace("\\", "")
-                                    break
+                                    continue
                                 else:
                                     w = 1
                             if param[1][i] == '_':
@@ -127,8 +126,10 @@ class HBNBCommand(cmd.Cmd):
                         w = 1
                     if w == 0:
                         param[0] = param[0].replace('"', '').replace("'", '')
-                        if isinstance(param[1], str):
+                        if isinstance(param[1], str) and "\\" not in param[1]:
                             param[1] = param[1].replace('"', '').replace("'", '')
+                        elif isinstance(param[1], str):
+                            param[1] = param[1][1 : -1]
                         s.__dict__[param[0]] = param[1]
                         storage.save()
             print(s.id)
