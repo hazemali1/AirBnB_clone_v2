@@ -33,7 +33,7 @@ class FileStorage:
             for k, v in self.__objects.items():
                 if isinstance(v, cls):
                     s[k] = v
-            return self.__objects[cls.__name__]
+            return s
 
     def new(self, obj):
         """
