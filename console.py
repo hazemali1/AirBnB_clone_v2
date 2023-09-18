@@ -104,7 +104,7 @@ class HBNBCommand(cmd.Cmd):
             for key, value in class_dict.items():
                 if arg == key:
                     s = value()
-            s.save()
+                s.save()
             
             if len(q) > 1:
                 for i in range(1, len(q)):
