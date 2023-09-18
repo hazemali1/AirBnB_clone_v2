@@ -125,7 +125,7 @@ class HBNBCommand(cmd.Cmd):
                     else:
                         w = 1
                     if w == 0:
-                        cmd_full = q[0] + " " + s.id + " " + param[0] + " " + param[1]
+                        cmd_full = str(q[0]) + " " + str(s.id) + " " + str(param[0]) + " " + str(param[1])
                         self.do_update(cmd_full)
             print(s.id)
 		    
