@@ -113,7 +113,6 @@ class HBNBCommand(cmd.Cmd):
                         for i in range(1, (len(param[1]) - 1)):
                             if param[1][i] == '"':
                                 if param[1][i - 1] == "\\":
-                                    param[1] = param[1].replace("\\", "")
                                     print(param[1])
                                     break
                                 else:
