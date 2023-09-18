@@ -130,7 +130,8 @@ class HBNBCommand(cmd.Cmd):
                             param[1] = param[1].replace('"', '').replace("'", '')
                         elif isinstance(param[1], str):
                             param[1] = param[1].replace("\\", "")
-                            param[1] = param[1][1: -1].replace('"', '').replace("'", '')
+                            param[1] = param[1][0].replace('"', '').replace("'", '')
+                            param[1] = param[1][-1].replace('"', '').replace("'", '')
                         s.__dict__[param[0]] = param[1]
                         storage.save()
             print(s.id)
