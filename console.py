@@ -109,6 +109,7 @@ class HBNBCommand(cmd.Cmd):
             if len(q) > 1:
                 for i in range(1, len(q)):
                     param = q[i].split("=")
+                    print(param[1])
                     if param[1][0] == '"':
                         for i in range(1, (len(param[1]) - 1)):
                             if param[1][i] == '"':
