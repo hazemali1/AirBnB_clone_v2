@@ -94,17 +94,41 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """create new instance"""
+        q = arg.split()
+        w = 0
         if not arg:
             print("** class name missing **")
-        elif arg not in class_dict.keys():
+        elif q[0] not in class_dict.keys():
             print("** class doesn't exist **")
-        else:
+        elif len(q) >= 1:
             for key, value in class_dict.items():
                 if arg == key:
                     s = value()
             s.save()
+            
+            if len(q) > 1:
+                for i in range(1, len(q)):
+                    param = q[i].split("=")
+                    if param[1][0] == '"':
+                        for i in range(1, (len(param[1]) - 1)):
+                            if param[1][i] == '"':
+                                if param[1][i - 1] == "\\":
+                                    continue
+                                else:
+                                    w = 1
+                            if param[1][i] == '_':
+                                param[1][i] = ' '
+                    elif '.' in param[1]:
+                        param[1] = float(param[1])
+                    elif param[1].isdigit():
+                        param[1] = int(param[1])
+                    else:
+                        w = 1
+                    if w == 0:
+                        cmd_full = q[0] + " " + s.id + " " + param[0] + " " + param[1]
+                        self.do_update(cmd_full)
             print(s.id)
-
+		    
     def do_show(self, arg):
         """show obj"""
         q = arg.split()
