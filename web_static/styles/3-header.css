@@ -1,0 +1,7 @@
+header {
+    background: white url("/web_static/images/logo.jpg")
+                no-repeat 20px center;
+    height: 70px;
+    width: 100%;
+    border-bottom: 1px solid #CCCCCC;
+}
