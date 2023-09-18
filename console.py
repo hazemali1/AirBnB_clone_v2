@@ -127,7 +127,7 @@ class HBNBCommand(cmd.Cmd):
                         w = 1
                     if w == 0:
                         param[0] = param[0].replace('"', ' ').replace("'", ' ')
-                        if isinstance(param[0], str):
+                        if isinstance(param[1], str):
                             param[1] = param[1].replace('"', ' ').replace("'", ' ')
                         s.__dict__[param[0]] = param[1]
                         storage.save()
