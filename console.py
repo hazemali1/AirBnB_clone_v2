@@ -126,6 +126,8 @@ class HBNBCommand(cmd.Cmd):
                     else:
                         w = 1
                     if w == 0:
+                        param[0] = param[0].replace('"', ' ').replace("'", ' ')
+                        param[1] = param[1].replace('"', ' ').replace("'", ' ')
                         s.__dict__[param[0]] = param[1]
                         storage.save()
             print(s.id)
