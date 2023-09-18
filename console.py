@@ -117,7 +117,7 @@ class HBNBCommand(cmd.Cmd):
                                 else:
                                     w = 1
                             if param[1][i] == '_':
-                                param[1][i] = param[1][i].replace("_", " ")
+                                param[1] = param[1].replace("_", " ")
                     elif '.' in param[1]:
                         param[1] = float(param[1])
                     elif param[1].isdigit():
