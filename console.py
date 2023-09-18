@@ -126,8 +126,8 @@ class HBNBCommand(cmd.Cmd):
                     else:
                         w = 1
                     if w == 0:
-                        cmd_full = str(q[0]) + " " + str(s.id) + " " + str(param[0]) + " " + str(param[1])
-                        self.do_update(cmd_full)
+                        s.__dict__[param[0]] = param[1]
+                        storage.save()
             print(s.id)
 		    
     def do_show(self, arg):
@@ -218,7 +218,6 @@ class HBNBCommand(cmd.Cmd):
         if len(q) > 3:
             p = 1
             v = str(q[3])
-            print(q[3])
             if q[3].isdigit():
                 v = int(q[3])
                 p = 2
