@@ -132,6 +132,7 @@ class HBNBCommand(cmd.Cmd):
                             param[1] = param[1].replace("\\", "")
                             param[1] = param[1].replace("'", '')
                             param[1] = param[1][1: -1]
+                            print(param[1])
                         s.__dict__[param[0]] = param[1]
                         storage.save()
             print(s.id)
