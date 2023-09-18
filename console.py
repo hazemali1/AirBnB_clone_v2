@@ -109,7 +109,7 @@ class HBNBCommand(cmd.Cmd):
             if len(q) > 1:
                 for i in range(1, len(q)):
                     param = q[i].split("=")
-                    if param[1][0] == '"':
+                    if param[1][0] == '"' and param[1][-1] == '"':
                         for i in range(1, (len(param[1]) - 1)):
                             if param[1][i] == '"':
                                 if param[1][i - 1] == "\\":
@@ -173,22 +173,22 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def do_all(self, arg):
-        """ Shows all objects, or all objects of a class"""
-        print_list = []
-
-        if args:
-            args = args.split(' ')[0]  # remove possible trailing args
-            if args not in HBNBCommand.classes:
-                print("** class doesn't exist **")
-                return
-            for k, v in storage._FileStorage__objects.items():
-                if k.split('.')[0] == args:
-                    print_list.append(str(v))
+        """print All"""
+        q = arg.split()
+        date_base = storage.all()
+        if arg and q[0] not in class_dict.keys():
+            print("** class doesn't exist **")
+        elif arg and q[0] in class_dict.keys():
+            z = []
+            for v in date_base.values():
+                if v.__class__.__name__ == q[0]:
+                    z.append(str(v))
+            print(z)
         else:
-            for k, v in storage._FileStorage__objects.items():
-                print_list.append(str(v))
-
-        print(print_list)
+            z = []
+            for v in date_base.values():
+                z.append(str(v))
+            print(z)
 
     def do_update(self, arg):
         """Update"""
