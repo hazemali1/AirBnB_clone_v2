@@ -102,9 +102,9 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         elif len(q) >= 1:
             for key, value in class_dict.items():
-                if arg == key:
+                if q[0] == key:
                     s = value()
-                s.save()
+            s.save()
             
             if len(q) > 1:
                 for i in range(1, len(q)):
