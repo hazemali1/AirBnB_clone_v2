@@ -111,7 +111,11 @@ class HBNBCommand(cmd.Cmd):
                     param = q[i].split("=")
                     if param[1][0] == '"' and param[1][-1] == '"':
                         for i in range(1, (len(param[1]) - 1)):
-                            
+                            if param[1][i] == '"':
+                                if param[1][i - 1] == "\\":
+                                    continue
+                                else:
+                                    w = 1
                             if param[1][i] == '_':
                                 param[1] = param[1].replace("_", " ")
                     elif '.' in param[1]:
