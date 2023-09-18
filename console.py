@@ -218,6 +218,7 @@ class HBNBCommand(cmd.Cmd):
         if len(q) > 3:
             p = 1
             v = str(q[3])
+            print(q[3])
             if q[3].isdigit():
                 v = int(q[3])
                 p = 2
