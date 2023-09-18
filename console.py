@@ -122,7 +122,6 @@ class HBNBCommand(cmd.Cmd):
                         param[1] = float(param[1])
                     elif param[1].isdigit():
                         param[1] = int(param[1])
-                        print(param[1])
                     else:
                         w = 1
                     if w == 0:
