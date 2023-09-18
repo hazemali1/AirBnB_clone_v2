@@ -29,6 +29,10 @@ class FileStorage:
         if cls is None:
             return self.__objects
         else:
+            s = {}
+            for k, v in self.__objects.items():
+                if isinstance(v, cls):
+                    s[k] = v
             return self.__objects[cls.__name__]
 
     def new(self, obj):
