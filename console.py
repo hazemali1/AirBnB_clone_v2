@@ -129,7 +129,7 @@ class HBNBCommand(cmd.Cmd):
                         if isinstance(param[1], str) and "\\" not in param[1]:
                             param[1] = param[1].replace('"', '').replace("'", '')
                         elif isinstance(param[1], str):
-                            param[1] = param[1].replace("\\", "")
+                            param[1] = param[1].replace("\\", "").replace("'", "")
                             param[1] = param[1][1 : -1]
                         s.__dict__[param[0]] = param[1]
                         storage.save()
