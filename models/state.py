@@ -5,7 +5,6 @@ Module with class State
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
-from models import storage
 
 
 class State(BaseModel, Base):
@@ -20,6 +19,7 @@ class State(BaseModel, Base):
         """
         list of city
         """
+        from models import storage
         l = []
         for k, v in storage.all(City).items():
             if v.state_id == self.id:
