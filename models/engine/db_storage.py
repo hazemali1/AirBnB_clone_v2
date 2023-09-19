@@ -6,6 +6,12 @@ import os
 from sqlalchemy import create_engine, MetaData
 from models.base_model import Base
 from sqlalchemy.orm import sessionmaker, scoped_session
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 class DBStorage:
@@ -26,9 +32,7 @@ class DBStorage:
 		self.__engine = create_engine("mysql+mysqldb://{}:{}@{}/{}"
 								.format(user, password, host, database), pool_pre_ping=True)
 		if os.getenv('HBNB_ENV') == 'test':
-			drop = MetaData(bind=self.__engine)
-			drop.reflect()
-			drop.drop_all()
+			Base.metadata.drop_all(bind=self.__engine)
 
 	def all(self, cls=None):
 		"""
