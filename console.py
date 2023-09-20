@@ -10,13 +10,6 @@ from models.engine.file_storage import class_dict
 from datetime import datetime
 import os
 import uuid
-from models.base_model import BaseModel
-from models.user import User
-from models.place import Place
-from models.state import State
-from models.city import City
-from models.amenity import Amenity
-from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
@@ -24,12 +17,6 @@ class HBNBCommand(cmd.Cmd):
     HBNB comands
     """
     prompt = "(hbnb) "
-    
-    classes = {
-               'BaseModel': BaseModel, 'User': User, 'Place': Place,
-               'State': State, 'City': City, 'Amenity': Amenity,
-               'Review': Review
-               }
 
     def default(self, arg):
         """Default
@@ -146,7 +133,7 @@ class HBNBCommand(cmd.Cmd):
         if not class_name:
             print("** class name missing **")
             return
-        elif class_name not in HBNBCommand.classes:
+        elif class_name not in class_dict:
             print("** class doesn't exist **")
             return
         if os.getenv('HBNB_TYPE_STORAGE') == 'db':
@@ -160,7 +147,7 @@ class HBNBCommand(cmd.Cmd):
             new_instance.save()
             print(new_instance.id)
         else:
-            new_instance = HBNBCommand.classes[class_name]()
+            new_instance = class_dict[class_name]()
             for key, value in obj_kwargs.items():
                 if key not in ignored_attrs:
                     setattr(new_instance, key, value)
