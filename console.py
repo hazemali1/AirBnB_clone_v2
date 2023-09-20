@@ -99,13 +99,13 @@ class HBNBCommand(cmd.Cmd):
         if not arg:
             print("** class name missing **")
         else:
-            args = arg.split()
-            class_name = args[0]
+            q = arg.split()
+            class_name = q[0]
             if class_name not in class_dict:
                 print("** class doesn't exist **")
             else:
                 params = {}
-                for param in args[1:]:
+                for param in q[1:]:
                     if '=' in param:
                         key, value = param.split('=')
                         if value.startswith('"') and value.endswith('"'):
@@ -129,9 +129,9 @@ class HBNBCommand(cmd.Cmd):
                 if 'updated_at' not in params:
                     params['updated_at'] = str(datetime.now())
 
-                new_instance = class_dict[class_name](**params)
-                new_instance.save()
-                print(new_instance.id)
+                s = class_dict[class_name](**params)
+                s.save()
+                print(s.id)
 		    
     def do_show(self, arg):
         """show obj"""
