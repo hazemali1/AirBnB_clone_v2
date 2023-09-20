@@ -101,7 +101,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             args = arg.split()
             class_name = args[0]
-            if class_name not in HBNBCommand.classes:
+            if class_name not in class_dict:
                 print("** class doesn't exist **")
             else:
                 params = {}
@@ -129,7 +129,7 @@ class HBNBCommand(cmd.Cmd):
                 if 'updated_at' not in params:
                     params['updated_at'] = datetime.now()
 
-                new_instance = HBNBCommand.classes[class_name](**params)
+                new_instance = class_dict[class_name](**params)
                 new_instance.save()
                 print(new_instance.id)
 		    
