@@ -94,9 +94,10 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """create new instance"""
+        q = arg.split()
         if not arg:
             print("** class name missing **")
-        elif arg not in class_dict.keys():
+        elif q[0] not in class_dict.keys():
             print("** class doesn't exist **")
         else:
             params = arg.split(',')
