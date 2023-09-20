@@ -32,7 +32,7 @@ class DBStorage:
 		self.__engine = create_engine("mysql+mysqldb://{}:{}@{}/{}"
 								.format(user, password, host, database), pool_pre_ping=True)
 		if os.getenv('HBNB_ENV') == 'test':
-			Base.metadata.drop_all(self.__engine)
+			Base.metadata.drop_all(bind=self.__engine)
 
 	def all(self, cls=None):
 		"""
@@ -46,11 +46,10 @@ class DBStorage:
 					k = "{}.{}".format(i.__class__.__name__, i.id)
 					obj[k] = i
 		else:
-			for class_name in cls:
-				query = self.__session.query(class_name).all()
-				for i in query:
-					k = "{}.{}".format(i.__class__.__name__, i.id)
-					obj[k] = i
+			query = self.__session.query(cls).all()
+			for i in query:
+				k = "{}.{}".format(i.__class__.__name__, i.id)
+				obj[k] = i
 		return obj
 	
 	def new(self, obj):
