@@ -105,7 +105,7 @@ class HBNBCommand(cmd.Cmd):
                 if q[0] == key:
                     s = value()
             s.save()
-        
+            
             if len(q) > 1:
                 for i in range(1, len(q)):
                     param = q[i].split("=")
@@ -119,7 +119,7 @@ class HBNBCommand(cmd.Cmd):
                             if param[1][i] == '_':
                                 param[1] = param[1].replace("_", " ")
                     elif '.' in param[1]:
-                         param[1] = float(param[1])
+                        param[1] = float(param[1])
                     elif param[1].isdigit():
                         param[1] = int(param[1])
                     else:
