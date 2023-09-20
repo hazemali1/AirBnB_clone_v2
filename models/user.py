@@ -5,6 +5,7 @@ Module with class User
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
+import os
 
 
 class User(BaseModel, Base):
@@ -16,5 +17,11 @@ class User(BaseModel, Base):
     first_name = Column(String(128), nullable=True)
     last_name = Column(String(128), nullable=True)
     __tablename__ = "users"
-    places = relationship("Place", backref="User", cascade="all, delete")
-    reviews = relationship("Review", backref="User", cascade="all, delete")
+    if os.getenv('HBNB_TYPE_STORAGE') == 'db':
+        places = relationship("Place", backref="User", cascade="all, delete")
+    else:
+        places = None
+    if os.getenv('HBNB_TYPE_STORAGE') == 'db':
+        reviews = relationship("Review", backref="User", cascade="all, delete")
+    else:
+        reviews = None
