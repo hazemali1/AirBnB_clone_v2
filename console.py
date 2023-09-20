@@ -94,37 +94,34 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """create new instance"""
-        q = arg.split()
         if not arg:
             print("** class name missing **")
-        elif q[0] not in class_dict.keys():
-            print("** class doesn't exist **")
         else:
-            params = arg.split(',')
-            obj_kwargs = {}
-
-            for param in params:
-                key_value = param.split('=')
-                key = key_value[0].strip()
-                value = key_value[1].strip()
-
-                if value.startswith('"') and value.endswith('"'):
-                    value = value[1:-1].replace('_', ' ')
-                elif '.' in value:
-                    try:
-                        value = float(value)
-                    except ValueError:
-                        continue
-                elif value.isdigit():
-                    value = int(value)
-                else:
-                    continue
-
-                obj_kwargs[key] = value
-
-            new_instance = class_dict[arg](**obj_kwargs)
-            new_instance.save()
-            print(new_instance.id)
+            params = arg.split()
+            class_name = params[0]
+            if class_name not in class_dict.keys():
+                print("** class doesn't exist **")
+            else:
+                obj_kwargs = {}
+                for param in params[1:]:
+                    if '=' in param:
+                        key, value = param.split('=')
+                        if value.startswith('"') and value.endswith('"'):
+                            value = value[1:-1].replace('_', ' ')
+                        elif '.' in value:
+                            try:
+                                value = float(value)
+                            except ValueError:
+                                continue
+                        else:
+                            try:
+                                value = int(value)
+                            except ValueError:
+                                continue
+                        obj_kwargs[key] = value
+                new_instance = class_dict[class_name](**obj_kwargs)
+                new_instance.save()
+                print(new_instance.id)
 		    
     def do_show(self, arg):
         """show obj"""
