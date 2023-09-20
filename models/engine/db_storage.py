@@ -29,10 +29,10 @@ class DBStorage:
 		password = os.getenv('HBNB_MYSQL_PWD')
 		host = os.getenv('HBNB_MYSQL_HOST')
 		database = os.getenv('HBNB_MYSQL_DB')
-		self.__engine = create_engine("mysql+mysqldb://{}:{}@{}:3306/{}"
+		self.__engine = create_engine("mysql+mysqldb://{}:{}@{}/{}"
 								.format(user, password, host, database), pool_pre_ping=True)
 		if os.getenv('HBNB_ENV') == 'test':
-			Base.metadata.drop_all(bind=self.__engine)
+			Base.metadata.drop_all(self.__engine)
 
 	def all(self, cls=None):
 		"""
