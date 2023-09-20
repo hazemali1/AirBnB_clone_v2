@@ -2,13 +2,15 @@
 """
 Module with class Review
 """
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
+from sqlalchemy import Column, String, ForeignKey
 
 
-class Review(BaseModel):
+class Review(BaseModel, Base):
     """
     Review
     """
-    place_id = ""
-    user_id = ""
-    text = ""
+    place_id = Column(String(60), ForeignKey('places_id'), nullable=False)
+    user_id = Column(String(60), ForeignKey('users_id'), nullable=False)
+    text = Column(String(1024), nullable=False)
+    __tablename__ = "reviews"

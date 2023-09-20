@@ -4,6 +4,7 @@ Module with class Place
 """
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, Integer, ForeignKey, Float
+from sqlalchemy.orm import relationship
 
 
 class Place(BaseModel, Base):
@@ -22,3 +23,12 @@ class Place(BaseModel, Base):
     longitude = Column(Float, nullable=False)
     amenity_ids = []
     __tablename__ = "places"
+    reviews = relationship("Reviews", backref="Place", cascade="all, delete")
+    
+    def reviews(self):
+        from models import storage
+        l = []
+        for k, v in storage.all().items():
+            if v.place_id == self.id:
+                l.append(v)
+        return l
