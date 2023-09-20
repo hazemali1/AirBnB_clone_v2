@@ -34,6 +34,8 @@ class BaseModel:
                     setattr(self, k, datetime.fromisoformat(v))
                 else:
                     setattr(self, k, v)
+            if not hasattr(kwargs, 'id'):
+                setattr(self, 'id', str(uuid.uuid4()))
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
