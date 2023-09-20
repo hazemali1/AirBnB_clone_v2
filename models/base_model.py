@@ -28,11 +28,12 @@ class BaseModel:
         date_format = "%Y-%m-%dT%H:%M:%S.%f"
         if kwargs:
             for k, v in kwargs.items():
-                if k != "__class__":
-                    if k == "updated_at" or k == "created_at":
-                        setattr(self, k, datetime.fromisoformat(v))
-                    else:
-                        setattr(self, k, v)
+                if k == "__class__":
+                    continue
+                if k == "updated_at" or k == "created_at":
+                    setattr(self, k, datetime.fromisoformat(v))
+                else:
+                    setattr(self, k, v)
             if not hasattr(kwargs, 'id'):
                 setattr(self, 'id', str(uuid.uuid4()))
             if not hasattr(kwargs, 'created_at'):
