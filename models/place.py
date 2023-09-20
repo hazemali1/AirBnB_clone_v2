@@ -3,8 +3,14 @@
 Module with class Place
 """
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String, Integer, ForeignKey, Float
+from sqlalchemy import Column, String, Integer, ForeignKey, Float, Table
 from sqlalchemy.orm import relationship
+from models.amenity import Amenity
+
+
+place_amenity = Table('place_amenity', Base.metadata,
+                            Column('place_id', String(60), ForeignKey('places.id'), primary_key=True, nullable=False),
+                            Column('amenity_id', String(60), ForeignKey('amenities.id'), primary_key=True, nullable=False))
 
 
 class Place(BaseModel, Base):
@@ -24,6 +30,7 @@ class Place(BaseModel, Base):
     amenity_ids = []
     __tablename__ = "places"
     reviews = relationship("Reviews", backref="Place", cascade="all, delete")
+    amenities = relationship("Amenity", secondary=place_amenity, viewonly=False, backref="place_amenity")
     
     def reviews(self):
         from models import storage
@@ -32,3 +39,19 @@ class Place(BaseModel, Base):
             if v.place_id == self.id:
                 l.append(v)
         return l
+    
+    @property
+    def amenities(self):
+        """getter"""
+        from models import storage
+        l = []
+        for k, v in storage.all().items():
+            if v.place_id == self.id:
+                l.append(v)
+        return l
+    
+    @amenities.setter
+    def amenities(self, value):
+        """setter"""
+        if type(value) is Amenity and value.id not in self.amenity_ids:
+            self.amenity_ids.append(value.id)
