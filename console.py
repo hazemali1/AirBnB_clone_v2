@@ -7,6 +7,8 @@ import re
 import cmd
 from models import storage
 from models.engine.file_storage import class_dict
+import uuid
+from datetime import datetime
 
 
 class HBNBCommand(cmd.Cmd):
@@ -93,17 +95,17 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, arg):
-        """create new instance"""
+        """Create a new instance with given parameters"""
         if not arg:
             print("** class name missing **")
         else:
-            params = arg.split()
-            class_name = params[0]
-            if class_name not in class_dict.keys():
+            args = arg.split()
+            class_name = args[0]
+            if class_name not in HBNBCommand.classes:
                 print("** class doesn't exist **")
             else:
-                obj_kwargs = {}
-                for param in params[1:]:
+                params = {}
+                for param in args[1:]:
                     if '=' in param:
                         key, value = param.split('=')
                         if value.startswith('"') and value.endswith('"'):
@@ -118,8 +120,16 @@ class HBNBCommand(cmd.Cmd):
                                 value = int(value)
                             except ValueError:
                                 continue
-                        obj_kwargs[key] = value
-                new_instance = class_dict[class_name](**obj_kwargs)
+                        params[key] = value
+
+                if 'id' not in params:
+                    params['id'] = str(uuid.uuid4())
+                if 'created_at' not in params:
+                    params['created_at'] = datetime.now()
+                if 'updated_at' not in params:
+                    params['updated_at'] = datetime.now()
+
+                new_instance = HBNBCommand.classes[class_name](**params)
                 new_instance.save()
                 print(new_instance.id)
 		    
