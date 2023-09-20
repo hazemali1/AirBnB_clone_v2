@@ -94,47 +94,36 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """create new instance"""
-        q = arg.split()
-        w = 0
         if not arg:
             print("** class name missing **")
-        elif q[0] not in class_dict.keys():
+        elif arg not in class_dict.keys():
             print("** class doesn't exist **")
-        elif len(q) >= 1:
-            for key, value in class_dict.items():
-                if q[0] == key:
-                    s = value()
-            s.save()
-            
-            if len(q) > 1:
-                for i in range(1, len(q)):
-                    param = q[i].split("=")
-                    if param[1][0] == '"' and param[1][-1] == '"':
-                        for i in range(1, (len(param[1]) - 1)):
-                            if param[1][i] == '"':
-                                if param[1][i - 1] == "\\":
-                                    continue
-                                else:
-                                    w = 1
-                            if param[1][i] == '_':
-                                param[1] = param[1].replace("_", " ")
-                    elif '.' in param[1]:
-                        param[1] = float(param[1])
-                    elif param[1].isdigit():
-                        param[1] = int(param[1])
-                    else:
-                        w = 1
-                    if w == 0:
-                        param[0] = param[0].replace('"', '').replace("'", '')
-                        if isinstance(param[1], str) and "\\" not in param[1]:
-                            param[1] = param[1].replace('"', '').replace("'", '')
-                        elif isinstance(param[1], str):
-                            param[1] = param[1].replace("\\", "")
-                            param[1] = param[1].replace("'", '').replace('"', '')
+        else:
+            params = arg.split(',')
+            obj_kwargs = {}
 
-                        s.__dict__[param[0]] = param[1]
-                        storage.save()
-            print(s.id)
+            for param in params:
+                key_value = param.split('=')
+                key = key_value[0].strip()
+                value = key_value[1].strip()
+
+                if value.startswith('"') and value.endswith('"'):
+                    value = value[1:-1].replace('_', ' ')
+                elif '.' in value:
+                    try:
+                        value = float(value)
+                    except ValueError:
+                        continue
+                elif value.isdigit():
+                    value = int(value)
+                else:
+                    continue
+
+                obj_kwargs[key] = value
+
+            new_instance = class_dict[arg](**obj_kwargs)
+            new_instance.save()
+            print(new_instance.id)
 		    
     def do_show(self, arg):
         """show obj"""
