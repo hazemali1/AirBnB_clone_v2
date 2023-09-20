@@ -125,9 +125,9 @@ class HBNBCommand(cmd.Cmd):
                 if 'id' not in params:
                     params['id'] = str(uuid.uuid4())
                 if 'created_at' not in params:
-                    params['created_at'] = datetime.now()
+                    params['created_at'] = str(datetime.now())
                 if 'updated_at' not in params:
-                    params['updated_at'] = datetime.now()
+                    params['updated_at'] = str(datetime.now())
 
                 new_instance = class_dict[class_name](**params)
                 new_instance.save()
