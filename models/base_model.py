@@ -30,7 +30,7 @@ class BaseModel:
             for k, v in kwargs.items():
                 if k != "__class__":
                     if k == "updated_at" or k == "created_at":
-                        self.__dict__[k] = datetime.strptime(v, date_format)
+                        setattr(self, k, datetime.fromisoformat(v))
                     else:
                         setattr(self, k, v)
             if not hasattr(kwargs, 'id'):
