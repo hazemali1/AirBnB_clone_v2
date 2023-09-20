@@ -38,8 +38,6 @@ class BaseModel:
                 setattr(self, 'id', str(uuid.uuid4()))
             if not hasattr(kwargs, 'created_at'):
                 setattr(self, 'created_at', datetime.now())
-            if not hasattr(kwargs, 'updated_at'):
-                setattr(self, 'updated_at', datetime.now())
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
