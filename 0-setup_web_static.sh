@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # sets up wep server
-
 apt-get update
 apt-get install -y nginx
 mkdir -p /data/
