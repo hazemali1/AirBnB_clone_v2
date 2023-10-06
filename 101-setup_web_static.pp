@@ -8,7 +8,7 @@ exec { 'set_up':
   mkdir -p /data/web_static/releases/;
   mkdir -p /data/web_static/shared/;
   mkdir -p /data/web_static/releases/test/;
-  echo -e "Hello School" > /data/web_static/releases/test/index.html;
+  echo "Hello School" > /data/web_static/releases/test/index.html;
   rm -fr /data/web_static/current;
   ln -s /data/web_static/releases/test/ /data/web_static/current;
   chown -hR ubuntu:ubuntu /data/;
