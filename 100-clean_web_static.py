@@ -36,4 +36,4 @@ def do_clean(number=0):
             lis.append(w)
         lis.sort()
         for x in range(numb - n):
-            local("rm versions/web_static_{}.tgz".format(li[x]))
+            run("rm versions/web_static_{}.tgz".format(li[x]))
