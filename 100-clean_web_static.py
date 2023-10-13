@@ -27,19 +27,13 @@ def do_clean(number=0):
     li.sort()
     for x in range(num - n):
         local("rm versions/web_static_{}.tgz".format(li[x]))
-
     numb = 0
     lis = []
-    local("mkdir -p help")
-    try:
-        get(remote_path="/data/web_static/releases/web_static_*.tgz", local_path="help/")
-    except:
-        pass
-    for i in os.listdir("help/"):
-        numb += 1
-        qi = i[11:-4]
-        lis.append(qi)
-    lis.sort()
-    for x in range(numb - n):
-        run("rm /data/web_static/releases/web_static_{}.tgz".format(lis[x]))
-    local("rm -rf help")
+    with lcd('versions'):
+        for i in os.listdir("."):
+            numb += 1
+            w = i[11:-4]
+            lis.append(w)
+        lis.sort()
+        for x in range(numb - n):
+            local("rm versions/web_static_{}.tgz".format(li[x]))
