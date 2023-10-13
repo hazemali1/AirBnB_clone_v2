@@ -30,10 +30,6 @@ def do_clean(number=0):
     numb = 0
     lis = []
     with cd('/data/web_static/releases'):
-        for i in os.listdir("."):
-            numb += 1
-            w = i[11:-4]
-            lis.append(w)
-        lis.sort()
+        lis = run("ls -tr").split()
         for x in range(numb - n):
             run("rm web_static_{}.tgz".format(lis[x]))
