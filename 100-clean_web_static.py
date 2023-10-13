@@ -14,15 +14,30 @@ def do_clean(number=0):
     """
     clean
     """
-    number = 1 if int(number) == 0 else int(number)
+    if number == 0 or number == 1:
+        number = 2
+    num = 0
+    li = []
+    for i in os.listdir("versions/"):
+        num += 1
+        q = i[11:-4]
+        li.append(q)
+    li.sort()
+    for x in range(num - int(number)):
+        local("rm versions/web_static_{}.tgz".format(li[x]))
 
-    archives = sorted(os.listdir("versions"))
-    [archives.pop() for i in range(number)]
-    with lcd("versions"):
-        [local("rm ./{}".format(a)) for a in archives]
-
-    with cd("/data/web_static/releases"):
-        archives = run("ls -tr").split()
-        archives = [a for a in archives if "web_static_" in a]
-        [archives.pop() for i in range(number)]
-        [run("rm -rf ./{}".format(a)) for a in archives]
+    n = 0
+    lis = []
+    local("mkdir -p help")
+    try:
+        get(remote_path="/data/web_static/releases/web_static_*.tgz", local_path="help/")
+    except:
+        pass
+    for i in os.listdir("help/"):
+        n += 1
+        qi = i[11:-4]
+        lis.append(qi)
+    lis.sort()
+    for x in range(num - int(number)):
+        run("rm /data/web_static/releases/web_static_{}.tgz".format(lis[x]))
+    local("rm -rf help")
