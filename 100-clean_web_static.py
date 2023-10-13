@@ -29,7 +29,7 @@ def do_clean(number=0):
         local("rm versions/web_static_{}.tgz".format(li[x]))
     numb = 0
     lis = []
-    with lcd('/data/web_static/releases'):
+    with cd('/data/web_static/releases'):
         for i in os.listdir("."):
             numb += 1
             w = i[11:-4]
