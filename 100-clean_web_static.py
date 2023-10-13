@@ -14,18 +14,15 @@ def do_clean(number=0):
     """
     clean
     """
-    if number == 0 or number == 1:
-        number = 2
-    with lcd('versions'):
-        archives = sorted(os.listdir('.'))
-        to_delete = archives[:-number]
+    number = 1 if int(number) == 0 else int(number)
 
-        for archive in to_delete:
-            local('rm -f {}'.format(archive))
+    archives = sorted(os.listdir("versions"))
+    [archives.pop() for i in range(number)]
+    with lcd("versions"):
+        [local("rm ./{}".format(a)) for a in archives]
 
-    with cd('/data/web_static/releases'):
-        archives = run('ls -tr').split()
-        to_delete = archives[:-number]
-
-        for archive in to_delete:
-            run('rm -f {}'.format(archive))
+    with cd("/data/web_static/releases"):
+        archives = run("ls -tr").split()
+        archives = [a for a in archives if "web_static_" in a]
+        [archives.pop() for i in range(number)]
+        [run("rm -rf ./{}".format(a)) for a in archives]
