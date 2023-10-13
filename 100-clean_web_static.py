@@ -27,9 +27,9 @@ def do_clean(number=0):
     li.sort()
     for x in range(num - n):
         local("rm versions/web_static_{}.tgz".format(li[x]))
-    numb = 0
     lis = []
     with cd('/data/web_static/releases'):
         lis = run("ls -tr").split()
+        numb = len(lis)
         for x in range(numb - n):
             run("rm {}".format(lis[x]))
