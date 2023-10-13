@@ -14,8 +14,10 @@ def do_clean(number=0):
     """
     clean
     """
-    if number == 0:
-        number = 1
+    if int(number) == 0:
+        n = 1
+    else:
+        n = int(number)
     num = 0
     li = []
     for i in os.listdir("versions/"):
@@ -23,7 +25,7 @@ def do_clean(number=0):
         q = i[11:-4]
         li.append(q)
     li.sort()
-    for x in range(num - int(number)):
+    for x in range(num - n):
         local("rm versions/web_static_{}.tgz".format(li[x]))
 
 
