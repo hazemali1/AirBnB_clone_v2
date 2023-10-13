@@ -32,4 +32,4 @@ def do_clean(number=0):
     with cd('/data/web_static/releases'):
         lis = run("ls -tr").split()
         for x in range(numb - n):
-            run("rm web_static_{}.tgz".format(lis[x]))
+            run("rm {}".format(lis[x]))
