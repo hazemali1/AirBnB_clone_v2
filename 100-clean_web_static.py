@@ -30,6 +30,10 @@ def do_clean(number=0):
     lis = []
     with cd('/data/web_static/releases'):
         lis = run("ls -tr").split()
-        numb = len(lis)
+        p = []
+        for k in lis:
+            if k[:11] == "web_static_":
+                p.append(k)
+        numb = len(p)
         for x in range(numb - n):
-            run("rm {}".format(lis[x]))
+            run("rm {}".format(p[x]))
