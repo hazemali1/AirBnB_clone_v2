@@ -36,4 +36,4 @@ def do_clean(number=0):
                 p.append(k)
         numb = len(p)
         for x in range(numb - n):
-            run("rm -r {}".format(p[x]))
+            run("rm -rf {}".format(p[x]))
