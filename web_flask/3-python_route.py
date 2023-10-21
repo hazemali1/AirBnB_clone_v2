@@ -53,7 +53,7 @@ def text_p(text="is cool"):
             t += ' '
         else:
             t += i
-    return "C " + t
+    return "Python " + t
 
 
 if __name__ == '__main__':
