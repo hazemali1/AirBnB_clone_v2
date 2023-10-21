@@ -43,7 +43,7 @@ def text(text):
 
 
 @app.route("/python/<text>", strict_slashes=False)
-def text(text="is cool"):
+def text_p(text="is cool"):
     """
     hbnb
     """
