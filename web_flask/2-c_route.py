@@ -33,7 +33,13 @@ def text(text):
     """
     hbnb
     """
-    return "C " + text
+    t = ""
+    for i in text:
+        if i == '_':
+            t += ' '
+        else:
+            t += i
+    return "C " + t
 
 
 if __name__ == '__main__':
