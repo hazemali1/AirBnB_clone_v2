@@ -66,7 +66,7 @@ def number(n):
 
 
 @app.route("/number_template/<int:n>", strict_slashes=False)
-def number(n):
+def number_html_file(n):
     """
     hbnb
     """
