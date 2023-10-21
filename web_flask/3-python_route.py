@@ -43,10 +43,12 @@ def text(text):
 
 
 @app.route("/python/<text>", strict_slashes=False)
-def text_p(text="is cool"):
+def text_p(text):
     """
     hbnb
     """
+    if text == None:
+        text = "is cool"
     t = ""
     for i in text:
         if i == '_':
