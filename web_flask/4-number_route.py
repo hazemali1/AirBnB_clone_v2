@@ -62,7 +62,7 @@ def number(n):
     """
     hbnb
     """
-    return n + " is a number"
+    return "{} is a number".format(n)
 
 
 if __name__ == '__main__':
