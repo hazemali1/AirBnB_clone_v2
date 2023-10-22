@@ -29,7 +29,7 @@ def cities_by_state_id(id):
     hbnb
     """
     state_id = None
-    for i in storage.all(State).values():
+    for i in list(storage.all(State).values()):
         if i.id == id:
             state_id = i
     return render_template("9-states.html", state_id=state_id)
