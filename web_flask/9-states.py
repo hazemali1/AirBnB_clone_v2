@@ -33,7 +33,7 @@ def cities_by_state_id(id):
         if i.id == id:
             state_id = i
     for state in state_id:
-        state_id.cities = sorted(state.cities, key=lambda city: city.name)
+        state.cities = sorted(state.cities, key=lambda city: city.name)
     return render_template("9-states.html", state_id=state_id)
 
 
