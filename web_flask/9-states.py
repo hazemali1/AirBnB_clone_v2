@@ -20,7 +20,7 @@ def states():
     hbnb
     """
     states = sorted(list(storage.all(State).values()), key=lambda x: x.name)
-    return render_template("9-states.html", states=states)
+    return render_template("9-states.html", states=states, state_id = None)
 
 
 @app.route("/states/<id>", strict_slashes=False)
@@ -32,7 +32,7 @@ def cities_by_state_id(id):
     for i in list(storage.all(State).values()):
         if i.id == id:
             state_id = i
-    return render_template("9-states.html", state_id=state_id)
+    return render_template("9-states.html", state_id=state_id, states=None)
 
 
 @app.teardown_appcontext
