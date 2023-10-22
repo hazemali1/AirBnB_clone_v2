@@ -77,4 +77,9 @@ class FileStorage:
         if obj is not None:
             del FileStorage.__objects["{}.{}".format(obj.__class__.__name__,
                                                      obj.id)]
-            
+
+    def close(self):
+        """
+        deserializing
+        """
+        self.reload()
