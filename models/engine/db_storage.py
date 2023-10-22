@@ -10,6 +10,7 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
+from models.engine.file_storage import FileStorage
 class_dict = {"BaseModel": BaseModel, "User": User, "Place": Place,
               "State": State, "City": City, "Amenity": Amenity,
               "Review": Review}
