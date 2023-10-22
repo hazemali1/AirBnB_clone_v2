@@ -23,7 +23,7 @@ def states():
 
 
 @app.teardown_appcontext
-def teardown():
+def teardown(exception):
     """
     teardown app context
     """
