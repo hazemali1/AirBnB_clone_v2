@@ -18,7 +18,7 @@ class State(BaseModel, Base):
 		cities = relationship("City", backref="State", cascade="all, delete")
 		name = Column(String(128), nullable=False)
 	else:
-		name = "hehe"
+		name = ""
 		def cities(self):
 			"""
       list of city
