@@ -19,7 +19,7 @@ def cities_by_state():
     """
     hbnb
     """
-    states = storage.all(State)
+    states = storage.all(State).values()
     states = sorted(states, key=lambda state: state.name)
 
     for state in states:
