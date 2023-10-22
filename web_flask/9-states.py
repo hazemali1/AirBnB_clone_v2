@@ -28,6 +28,7 @@ def cities_by_state_id(id):
     """
     hbnb
     """
+    state_id = None
     for i in storage.all(State).values():
         if i.id == id:
             state_id = i
