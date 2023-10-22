@@ -1,86 +1,85 @@
 #!/usr/bin/python3
 """
-DBStorage
+FileStorage class
 """
-import os
-from sqlalchemy import create_engine, MetaData
-from models.base_model import Base
-from sqlalchemy.orm import sessionmaker, scoped_session
+import json
+from models.base_model import BaseModel
 from models.user import User
+from models.place import Place
 from models.state import State
 from models.city import City
 from models.amenity import Amenity
-from models.place import Place
 from models.review import Review
+class_dict = {"BaseModel": BaseModel, "User": User, "Place": Place,
+              "State": State, "City": City, "Amenity": Amenity,
+              "Review": Review}
 
 
-class DBStorage:
-	"""
-	DBStorage
-	"""
-	__engine = None
-	__session = None
+class FileStorage:
+    """
+    define some method and attributes
+    """
+    __file_path = "file.json"
+    __objects = {}
 
-	def __init__(self):
-		"""
-		init
-		"""
-		user = os.getenv('HBNB_MYSQL_USER')
-		password = os.getenv('HBNB_MYSQL_PWD')
-		host = os.getenv('HBNB_MYSQL_HOST')
-		database = os.getenv('HBNB_MYSQL_DB')
-		self.__engine = create_engine("mysql+mysqldb://{}:{}@{}/{}"
-								.format(user, password, host, database), pool_pre_ping=True)
-		if os.getenv('HBNB_ENV') == 'test':
-			Base.metadata.drop_all(bind=self.__engine)
-
-	def all(self, cls=None):
-		"""
-		All
-		"""
-		obj = {}
-		if cls is None:
-			for class_name in (User, State, City, Amenity, Place, Review):
-				query = self.__session.query(class_name).all()
-				for i in query:
-					k = "{}.{}".format(i.__class__.__name__, i.id)
-					obj[k] = i
-		else:
-			query = self.__session.query(cls).all()
-			for i in query:
-				k = "{}.{}".format(i.__class__.__name__, i.id)
-				obj[k] = i
-		return obj
-	
-	def new(self, obj):
-		"""
-        New
+    def all(self, cls=None):
         """
-		self.__session.add(obj)
-
-	def save(self):
-		"""
-        Save
+        returns the dictionary __objects
         """
-		self.__session.commit()
+        if cls is None:
+            return self.__objects
+        else:
+            s = {}
+            for k, v in self.__objects.items():
+                if isinstance(v, cls):
+                    s[k] = v
+            return s
 
-	def delete(self, obj=None):
-		"""
-		Delete
+    def new(self, obj):
         """
-		if obj is not None:
-			self.__session.delete(obj)
+        sets in __objects the obj with key <obj class name>.id
+        """
+        FileStorage.__objects["{}.{}".format(obj.__class__.__name__,
+                                             obj.id)] = obj
 
-	def reload(self):
-		"""
-		reload
-		"""
-		Base.metadata.create_all(self.__engine)
-		session = sessionmaker(bind=self.__engine, expire_on_commit=False)
-		self.__session = scoped_session(session)
+    def save(self):
+        """
+        serializes __objects to the JSON file (path: __file_path)
+        """
+        dict1 = {}
+        for k, v in FileStorage.__objects.items():
+            dict1[k] = v.to_dict()
+        with open(FileStorage.__file_path, "w", encoding="UTF-8") as f:
+            json.dump(dict1, f)
 
-	def close(self):
-		"""
-		close
-		"""
-		self.__session.remove()
+    def reload(self):
+        """
+        deserializes the JSON file to __objects
+        (only if the JSON file (__file_path) exists ;
+        otherwise, do nothing. If the file doesn’t exist,
+        no exception should be raised)
+        """
+        try:
+            with open(FileStorage.__file_path) as file:
+                data = json.load(file)
+            for key, value in data.items():
+                class_name = value["__class__"]
+                for i, j in class_dict.items():
+                    if class_name == i:
+                        FileStorage.__objects[key] = j(**value)
+        except FileNotFoundError:
+            return
+
+    def delete(self, obj=None):
+        """
+        Deletes the object
+        """
+        if obj is not None:
+            del FileStorage.__objects["{}.{}".format(obj.__class__.__name__,
+                                                     obj.id)]
+
+    def close(self):
+        """
+        deserializing
+        """
+        self.reload()
