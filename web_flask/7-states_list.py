@@ -5,6 +5,7 @@ import
 
 from flask import Flask, render_template
 from models import storage
+from models.state import State
 """
 flask
 """
@@ -18,11 +19,16 @@ def states():
     """
     hbnb
     """
-    states = sorted(list(storage.all("State").values()), key=lambda x: x.name)
+    states = sorted(list(storage.all(State).values()), key=lambda x: x.name)
     return render_template("7-states_list.html", states=states)
 
 
-
+@app.teardown_appcontext
+def teardown(exception):
+    """
+    teardown app context
+    """
+    storage.close()
 
 
 if __name__ == '__main__':
