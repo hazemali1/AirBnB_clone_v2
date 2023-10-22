@@ -25,7 +25,8 @@ def states(id=None):
     for i in list(storage.all(State).values()):
         if i.id == id:
             state_id = i
-    return render_template("9-states.html", states=states, state_id=state_id, id=id)
+    return render_template("9-states.html", states=states, state_id=state_id,
+                           id=id)
 
 
 @app.teardown_appcontext
