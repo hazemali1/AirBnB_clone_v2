@@ -15,7 +15,7 @@ app = Flask(__name__)
 
 
 @app.route("/states_list", strict_slashes=False)
-def states(storage.all(State)):
+def states(states=storage.all(State)):
     """
     hbnb
     """
