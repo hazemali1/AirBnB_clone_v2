@@ -14,13 +14,12 @@ flask
 app = Flask(__name__)
 
 
-states=storage.all(State)
 @app.route("/states_list", strict_slashes=False)
-def states(states):
+def states(states=storage.all(State)):
     """
     hbnb
     """
-    return render_template("7-states_list.html", states=states)
+    return render_template("7-states_list.html", states=storage.all(State))
 
 
 if __name__ == '__main__':
