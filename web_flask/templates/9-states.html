@@ -5,7 +5,7 @@
     </HEAD>
     <BODY>
 			{% if states %}
-			<H1>States</H1>
+			<H1>Statess</H1>
 			<UL>
 				{% for s in states %}
 				<LI>{{ s.id }}: <B>{{ s.name }}</B>
@@ -21,7 +21,7 @@
 				{% endfor %}
 			</UL>
 			{% else %}
-	    <H1>Nott found!</H1>
+	    <H1>Not found!</H1>
 			{% endif %}
 		</BODY>
 	</HTML>
