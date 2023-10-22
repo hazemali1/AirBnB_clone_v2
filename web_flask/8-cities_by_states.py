@@ -19,7 +19,6 @@ def cities_by_state():
     """
     hbnb
     """
-    print("hehe")
     cities = sorted(list(storage.all(State).values()), key=lambda x: x.name)
     return render_template("8-cities_by_states.html", states=cities)
 
