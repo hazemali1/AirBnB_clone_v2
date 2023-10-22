@@ -20,8 +20,7 @@ def cities_by_state():
     hbnb
     """
     cities = sorted(list(storage.all(State).values()), key=lambda x: x.name)
-    for city in cities:
-    	return render_template("8-cities_by_states.html", states=city)
+    return render_template("8-cities_by_states.html", states=cities)
 
 
 @app.teardown_appcontext
