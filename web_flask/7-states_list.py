@@ -21,7 +21,7 @@ def states():
     """
     hbnb
     """
-    states = storage.all(State)
+    states = storage.all(State).values()
     return render_template("7-states_list.html", states=storage.all(State))
 
 
