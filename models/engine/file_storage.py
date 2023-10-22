@@ -31,7 +31,7 @@ class FileStorage:
         else:
             s = {}
             for k, v in self.__objects.items():
-                if isinstance(v, cls):
+                if cls == v.__class__ or cls == v.__class__.__name__:
                     s[k] = v
             return s
 
