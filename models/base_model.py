@@ -33,6 +33,7 @@ class BaseModel:
                 if k == "updated_at" or k == "created_at":
                     setattr(self, k, datetime.fromisoformat(v))
                 else:
+                    print(k)
                     setattr(self, k, v)
             if not hasattr(kwargs, 'id'):
                 setattr(self, 'id', str(uuid.uuid4()))
