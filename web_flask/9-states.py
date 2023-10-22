@@ -35,7 +35,12 @@ def cities_by_state_id(id):
     return render_template("9-states.html", state_id=state_id)
 
 
-
+@app.teardown_appcontext
+def teardown(exception):
+    """
+    teardown app context
+    """
+    storage.close()
 
 
 if __name__ == '__main__':
