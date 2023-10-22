@@ -19,13 +19,10 @@ def cities_by_state():
     """
     hbnb
     """
-    states = storage.all(State).values()
-    states = sorted(states, key=lambda state: state.name)
-
-    for state in states:
+    cities = sorted(list(storage.all(State).values()), key=lambda x: x.name)
+    for state in cities:
         state.cities = sorted(state.cities, key=lambda city: city.name)
-
-    return render_template("8-cities_by_states.html", states=states)
+    return render_template("8-cities_by_states.html", states=cities)
 
 
 @app.teardown_appcontext
