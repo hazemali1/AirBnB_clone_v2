@@ -19,8 +19,9 @@ def states():
     """
     hbnb
     """
+    state_id = None
     states = sorted(list(storage.all(State).values()), key=lambda x: x.name)
-    return render_template("9-states.html", states=states, state_id = None)
+    return render_template("9-states.html", states=states, state_id=state_id)
 
 
 @app.route("/states/<id>", strict_slashes=False)
@@ -28,11 +29,12 @@ def cities_by_state_id(id):
     """
     hbnb
     """
+    states=None
     state_id = None
     for i in list(storage.all(State).values()):
         if i.id == id:
             state_id = i
-    return render_template("9-states.html", state_id=state_id, states=None)
+    return render_template("9-states.html", state_id=state_id, states=states)
 
 
 @app.teardown_appcontext
