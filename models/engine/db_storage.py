@@ -15,7 +15,7 @@ class_dict = {"BaseModel": BaseModel, "User": User, "Place": Place,
               "Review": Review}
 
 
-class FileStorage:
+class DBStorage:
     """
     define some method and attributes
     """
