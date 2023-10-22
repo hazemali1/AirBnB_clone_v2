@@ -15,26 +15,17 @@ app = Flask(__name__)
 
 
 @app.route("/states", strict_slashes=False)
-def states():
-    """
-    hbnb
-    """
-    state_id = None
-    states = sorted(list(storage.all(State).values()), key=lambda x: x.name)
-    return render_template("9-states.html", states=states, state_id=state_id)
-
-
 @app.route("/states/<id>", strict_slashes=False)
-def cities_by_state_id(id):
+def states(id=None):
     """
     hbnb
     """
-    states=None
+    states = sorted(list(storage.all(State).values()), key=lambda x: x.name)
     state_id = None
     for i in list(storage.all(State).values()):
         if i.id == id:
             state_id = i
-    return render_template("9-states.html", state_id=state_id, states=states)
+    return render_template("9-states.html", states=states, state_id=state_id, id=id)
 
 
 @app.teardown_appcontext
