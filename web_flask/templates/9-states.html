@@ -10,7 +10,7 @@
 				{% for s in states %}
 				<LI>{{ s.id }}: <B>{{ s.name }}</B>
 				</LI>
-				{% for d in states.cities %}
+				{% for d in s.cities %}
 				<LI>{{ d.id }}: <B>{{ d.name }}</B></LI>
 				{% endfor %}
         {% endfor %}
