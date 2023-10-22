@@ -31,7 +31,7 @@ def cities_by_state_id(id):
     for i in storage.all(State).values():
         if i.id == id:
             state_id = i
-    return render_template("9-states.html", state_id=id)
+    return render_template("9-states.html", state_id=state_id)
 
 
 @app.teardown_appcontext
