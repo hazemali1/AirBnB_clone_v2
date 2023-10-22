@@ -14,12 +14,6 @@ flask
 app = Flask(__name__)
 
 
-@app.teardown_appcontext
-def teardown():
-    """
-    teardown app context
-    """
-    storage.close()
 
 
 @app.route("/states_list", strict_slashes=False)
