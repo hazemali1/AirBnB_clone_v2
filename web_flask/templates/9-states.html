@@ -10,9 +10,6 @@
 				{% for s in states %}
 				<LI>{{ s.id }}: <B>{{ s.name }}</B>
 				</LI>
-				{% for d in s.cities %}
-				<LI>{{ d.id }}: <B>{{ d.name }}</B></LI>
-				{% endfor %}
         {% endfor %}
 			</UL>
 			{% elif state_id %}
