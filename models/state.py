@@ -19,6 +19,7 @@ class State(BaseModel, Base):
 		name = Column(String(128), nullable=False)
 	else:
 		name = ""
+		@property
 		def cities(self):
 			"""
       list of city

@@ -30,13 +30,9 @@ class FileStorage:
             return self.__objects
         else:
             s = {}
-            for key, value in self.__objects.items():
-                    if type(cls) is str:
-                        if cls == key.split('.')[0]:
-                            s[key] = value
-                    else:
-                        if cls is type(value):
-                            s[key] = value
+            for k, v in self.__objects.items():
+                if isinstance(v, cls):
+                    s[k] = v
             return s
 
     def new(self, obj):
