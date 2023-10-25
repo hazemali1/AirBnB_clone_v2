@@ -14,19 +14,12 @@ flask
 app = Flask(__name__)
 
 
-@app.route("/states", strict_slashes=False)
-@app.route("/states/<id>", strict_slashes=False)
-def states(id=None):
+@app.route("/hbnb_filters", strict_slashes=False)
+def filters():
     """
     hbnb
     """
-    states = sorted(list(storage.all(State).values()), key=lambda x: x.name)
-    state_id = None
-    for i in list(storage.all(State).values()):
-        if i.id == id:
-            state_id = i
-    return render_template("9-states.html", states=states, state_id=state_id,
-                           id=id)
+    return render_template("10-hbnb_filters.html")
 
 
 @app.teardown_appcontext

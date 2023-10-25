@@ -1,26 +1,55 @@
 <!DOCTYPE html>
-<HTML lang="en">
-    <HEAD>
-        <TITLE>HBNB</TITLE>
-    </HEAD>
-    <BODY>
-			{% if not id %}
-			<H1>States</H1>
-			<UL>
-				{% for s in states %}
-				<LI>{{ s.id }}: <B>{{ s.name }}</B></LI>
-        {% endfor %}
-			</UL>
-			{% elif state_id %}
-			<H1>States: {{ state_id.name }}</H1>
-			<H3>Cities:</H3>
-			<UL>
-				{% for d in state_id.cities|sort(attribute='name') %}
-				<LI>{{ d.id }}: <B>{{ d.name }}</B></LI>
-				{% endfor %}
-			</UL>
-			{% else %}
-	    <H1>Not found!</H1>
-			{% endif %}
-		</BODY>
-	</HTML>
+<html>
+    <head>
+        <title>
+            AirBnB clone
+        </title>
+        <link rel="stylesheet" href="../static/styles/4-common.css">
+        <link rel="stylesheet" href="../static/styles/3-header.css">
+        <link rel="stylesheet" href="../static/styles/3-footer.css">
+        <link rel="stylesheet" href="../static/styles/6-filters.css">
+        <link rel="icon" href="images/icon.jpg">
+    </head>
+    <body>
+        <header></header>
+        <div class="container">
+            <section class="filters">
+                <div class="locations">
+                    <h3>States</h3>
+                    <h4>&nbsp;</h4>
+                    <div class="popover">
+                        <ul>
+                            <h2>state name</h2>
+                            <li>city</li>
+                            <li>city</li>
+                        </ul>
+                        <ul>
+                            <h2>state name</h2>
+                            <li>city</li>
+                            <li>city</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="amenities">
+                    <h3>Amenities</h3>
+                    <h4>&nbsp;</h4>
+                    <div class="popover">
+                        <ul>
+                            <li>amenitie</li>
+                            <li>amenitie</li>
+                            <li>amenitie</li>
+                            <li>amenitie</li>
+                        </ul>
+                    </div>
+                </div>
+                <button>
+                    Search
+                </button>
+            </section>
+        </div>
+        <footer>
+            <br>
+            Best School
+        </footer>
+    </body>
+</html>
