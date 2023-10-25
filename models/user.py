@@ -17,11 +17,11 @@ class User(BaseModel, Base):
     first_name = Column(String(128), nullable=True)
     last_name = Column(String(128), nullable=True)
     __tablename__ = "users"
-    if os.getenv('HBNB_TYPE_STORAGE') == 'dbd':
+    if os.getenv('HBNB_TYPE_STORAGE') == 'db':
         places = relationship("Place", backref="User", cascade="all, delete")
     else:
         places = None
-    if os.getenv('HBNB_TYPE_STORAGE') == 'db':
+    if os.getenv('HBNB_TYPE_STORAGE') == 'dbd':
         reviews = relationship("Review", backref="User", cascade="all, delete")
     else:
         reviews = None
